@@ -1,0 +1,6 @@
+# Ignore IDE files
+.idea/
+
+# Ignore system files
+Thumbs.db
+.DS_Store
