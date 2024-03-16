@@ -9,6 +9,8 @@ app.listen(3000, ()=>{
 const mongoose=require('./database/mongoose.js');
 
 const User=require('./database/models/user.js')
+const Car=require('./database/models/Car.js')
+const Laptop=require('./database/models/Laptop.js')
 
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
@@ -32,6 +34,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
 
 const path = require('path');
 app.use('/images', express.static(path.join(__dirname, 'uploads')));
@@ -98,6 +101,74 @@ app.post('/login', async (req, res) => {
     res.status(200).json({ message: 'Login successful', user });
   } catch (error) {
     console.error('Error during login:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+app.post('/cars', upload.array('images'), async (req, res) => {
+  try {
+
+    // Handle uploaded images
+    const images = req.files.map(file => file.filename);
+    // Extract other car data from request body
+    const { engineCapacity, modelYear, Mileage, Company, Vaarient, EngineType, Transmission, BodyType, accident, location, description } = req.body;
+
+    // Create a new Car instance with the extracted data
+    const car = new Car({
+      engineCapacity,
+      modelYear,
+      Mileage,
+      Company,
+      Vaarient,
+      EngineType,
+      Transmission,
+      BodyType,
+      accident,
+      location,
+      description,
+      images // Associate the filenames of uploaded images with the car
+    });
+
+    // Save the car data
+    await car.save();
+
+    res.status(201).json({ message: 'Car data saved successfully' });
+  } catch (error) {
+    console.error('Error saving car data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+app.post('/laptops', upload.array('images'), async (req, res) => {
+  try {
+    const { company, typeName, Ram, Weight, Touchscreen, Ips, ppi, Cpubrand, HDD, SSD, Gpubrand, os, location, description } = req.body;
+    const images = req.files.map(file => file.filename); // Get filenames of uploaded images
+
+    const laptop = new Laptop({
+      company,
+      typeName,
+      Ram,
+      Weight,
+      Touchscreen,
+      Ips,
+      ppi,
+      Cpubrand,
+      HDD,
+      SSD,
+      Gpubrand,
+      os,
+      location,
+      description,
+      images
+    });
+
+    await laptop.save();
+    res.status(201).json({ message: 'Laptop data saved successfully' });
+  } catch (error) {
+    console.error('Error saving laptop data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
