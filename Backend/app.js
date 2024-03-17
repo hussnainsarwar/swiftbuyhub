@@ -41,14 +41,26 @@ app.use('/images', express.static(path.join(__dirname, 'uploads')));
 
 // image upload
 // Multer configuration for file uploads
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'uploads/'); // Specify the destination folder for uploaded images
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + '-' + file.originalname); // Generate a unique filename for the uploaded image
+//   }
+// });
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/'); // Specify the destination folder for uploaded images
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname); // Generate a unique filename for the uploaded image
+    // Generate a unique filename for the uploaded image
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const filename = uniqueSuffix + '-' + file.originalname;
+    cb(null, filename);
   }
 });
+
 
 const upload = multer({ storage: storage });
 
@@ -109,14 +121,15 @@ app.post('/login', async (req, res) => {
 
 app.post('/cars', upload.array('images'), async (req, res) => {
   try {
-
     // Handle uploaded images
     const images = req.files.map(file => file.filename);
-    // Extract other car data from request body
-    const { engineCapacity, modelYear, Mileage, Company, Vaarient, EngineType, Transmission, BodyType, accident, location, description } = req.body;
+    const timestamp = new Date();
 
+    // Extract other car data from request body
+    const {selectedCategory, engineCapacity, modelYear, Mileage, Company, Vaarient, EngineType, Transmission, BodyType, accident, location, description,userId ,price} = req.body;
     // Create a new Car instance with the extracted data
     const car = new Car({
+      selectedCategory,
       engineCapacity,
       modelYear,
       Mileage,
@@ -128,7 +141,10 @@ app.post('/cars', upload.array('images'), async (req, res) => {
       accident,
       location,
       description,
-      images // Associate the filenames of uploaded images with the car
+      images, 
+      userId,
+      timestamp ,
+      price
     });
 
     // Save the car data
@@ -144,10 +160,11 @@ app.post('/cars', upload.array('images'), async (req, res) => {
 
 app.post('/laptops', upload.array('images'), async (req, res) => {
   try {
-    const { company, typeName, Ram, Weight, Touchscreen, Ips, ppi, Cpubrand, HDD, SSD, Gpubrand, os, location, description } = req.body;
+    const { selectedCategory,company, typeName, Ram, Weight, Touchscreen, Ips, ppi, Cpubrand, HDD, SSD, Gpubrand, os, location, description,Inches,pixels ,userId} = req.body;
     const images = req.files.map(file => file.filename); // Get filenames of uploaded images
-
+    const timestamp = new Date();
     const laptop = new Laptop({
+      selectedCategory,
       company,
       typeName,
       Ram,
@@ -162,7 +179,12 @@ app.post('/laptops', upload.array('images'), async (req, res) => {
       os,
       location,
       description,
-      images
+      images,
+      Inches,
+      pixels,
+      userId,
+      timestamp ,
+      price
     });
 
     await laptop.save();
@@ -172,3 +194,85 @@ app.post('/laptops', upload.array('images'), async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
+
+
+app.get('/cars/user/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const cars = await Car.find({ userId });
+    res.status(200).json(cars);
+  } catch (error) {
+    console.error('Error fetching cars:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/laptops/user/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const laptops = await Laptop.find({ userId });
+    res.status(200).json(laptops);
+  } catch (error) {
+    console.error('Error fetching laptops:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+
+
+app.get('/carsAll', async (req, res) => {
+  try {
+      const cars = await Car.find();
+      res.status(200).json(cars);
+  } catch (error) {
+      console.error('Error fetching cars:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// New endpoint to fetch all laptops
+app.get('/laptopsAll', async (req, res) => {
+  try {
+      const laptops = await Laptop.find();
+      res.status(200).json(laptops);
+  } catch (error) {
+      console.error('Error fetching laptops:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+// New endpoint to search for a document based on the selected category
+app.get('/search/:selectedCategory/:id', async (req, res) => {
+  try {
+    const selectedCategory = req.params.selectedCategory;
+    const id = req.params.id;
+
+    // Determine the collection based on the selected category
+    let Model;
+    if (selectedCategory === 'cars') {
+      Model = Car;
+    } else if (selectedCategory === 'laptops') {
+      Model = Laptop;
+    } else {
+      return res.status(400).json({ error: 'Invalid selected category' });
+    }
+
+    // Search for the document in the determined collection
+    const document = await Model.findOne({ _id: id });
+
+    if (document) {
+      // Document found, send it in the response
+      res.status(200).json(document);
+    } else {
+      // Document not found in the specified collection
+      res.status(404).json({ error: 'Document not found' });
+    }
+  } catch (error) {
+    console.error('Error searching document:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+

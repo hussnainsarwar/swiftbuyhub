@@ -10,7 +10,7 @@
                 <mat-select formControlName="selectedCategory" (valueChange)="updateFormControls()">
                     <mat-option value="cars">Cars</mat-option>
                     <mat-option value="laptops">Laptops</mat-option>
-                    <mat-option value="mobiles">Mobiles</mat-option>
+                    <!-- <mat-option value="mobiles">Mobiles</mat-option> -->
                   </mat-select>
                </mat-form-field>
 
@@ -68,9 +68,13 @@
             <div style="padding: 20px;">
               <ng-container *ngIf="postForm.value.selectedCategory === 'laptops' || postForm.value.selectedCategory === 'cars'">
               
-              
-
                 <div class="custom-card" [@.disabled]="!postForm.value.selectedCategory">
+                  
+<mat-form-field appearance="fill">
+  <mat-label>Price</mat-label>
+  <input matInput formControlName="price" placeholder="Enter price">
+</mat-form-field>
+
                   <ng-container *ngIf="postForm.value.selectedCategory === 'laptops'">
                        <!-- Show laptop or car details form controls -->
                       <mat-form-field class="custom-input">
@@ -87,16 +91,24 @@
                     </mat-form-field>
                     <mat-form-field class="custom-input">
                         <mat-label>Touchscreen</mat-label>
-                        <input matInput formControlName="Touchscreen" placeholder="Touchscreen" />
+                        <input matInput formControlName="Touchscreen" placeholder="type '1' for Yes '0' for NO" />
                     </mat-form-field>
                     <mat-form-field class="custom-input">
-                        <mat-label>Ips</mat-label>
-                        <input matInput formControlName="Ips" placeholder="Ips" />
+                        <mat-label>Ips Panel</mat-label>
+                        <input matInput formControlName="Ips" placeholder="type '1' for Yes '0' for NO" />
                     </mat-form-field>
-                    <mat-form-field class="custom-input">
+                    <!-- <mat-form-field class="custom-input">
                         <mat-label>ppi</mat-label>
                         <input matInput formControlName="ppi" placeholder="ppi" />
-                    </mat-form-field>
+                    </mat-form-field> -->
+                    <mat-form-field class="custom-input">
+                      <mat-label>Pixels</mat-label>
+                      <input matInput formControlName="pixels" placeholder="eg 2560x1600" />
+                  </mat-form-field>
+                  <mat-form-field class="custom-input">
+                    <mat-label>Inches</mat-label>
+                    <input matInput formControlName="Inches" placeholder="eg 13.3" />
+                </mat-form-field>
                     <mat-form-field class="custom-input">
                         <mat-label>Cpubrand</mat-label>
                         <input matInput formControlName="Cpubrand" placeholder="Cpubrand" />

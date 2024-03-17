@@ -32,6 +32,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ViewCategoryComponent } from './screens/category/view-category/view-category.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CategoriesViewHomeComponent,
     CategoryComponent,
     PostAddComponent,
+    ViewCategoryComponent,
   ],
   imports: [
     BrowserModule,

@@ -41,10 +41,12 @@ export class PostAddComponent {
       Ips:[''],
       ppi:[''],
       Cpubrand:[''],
-      HDD:[''],
-      SSD:[''],
+      HDD:['0'],
+      SSD:['0'],
       Gpubrand:[''],
       os:[''],
+      Inches: ['', Validators.required],
+      pixels: ['', Validators.required],
 
 
       // Add other laptop details form controls here
@@ -60,6 +62,7 @@ export class PostAddComponent {
       // Add other car details form controls here
       location: [''],
       description: [''],
+      price: ['0']
 
     });
 
@@ -99,8 +102,22 @@ export class PostAddComponent {
     for (const image of this.uploadedImages) {
       formData.append('images', image);
     }
-  
+
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      const userId = userData.userId;
+      formData.append('userId', userId);
+    }
+    
+    const pixels = this.postForm.value.pixels;
+    const [X_res, Y_res] = pixels.split('*').map(Number);
+    const Inches = Number(this.postForm.value.Inches);
+    const ppi = Math.sqrt(X_res ** 2 + Y_res ** 2) / Inches;
+
     // Append other laptop data to the FormData object
+    formData.append('price', this.postForm.value.price);
+
     formData.append('selectedCategory', this.postForm.value.selectedCategory);
     formData.append('company', this.postForm.value.company);
     formData.append('typeName', this.postForm.value.typeName);
@@ -108,7 +125,7 @@ export class PostAddComponent {
     formData.append('Weight', this.postForm.value.Weight);
     formData.append('Touchscreen', this.postForm.value.Touchscreen);
     formData.append('Ips', this.postForm.value.Ips);
-    formData.append('ppi', this.postForm.value.ppi);
+    formData.append('ppi', ppi.toString());
     formData.append('Cpubrand', this.postForm.value.Cpubrand);
     formData.append('HDD', this.postForm.value.HDD);
     formData.append('SSD', this.postForm.value.SSD);
@@ -116,7 +133,8 @@ export class PostAddComponent {
     formData.append('os', this.postForm.value.os);
     formData.append('description', this.postForm.value.description);
     formData.append('location', this.postForm.value.location);
-  
+    formData.append('Inches', this.postForm.value.Inches);
+    formData.append('pixels', this.postForm.value.pixels);
     // Send the FormData object to the backend API
     this.apiService.saveLaptop(formData).subscribe(
       (response) => {
@@ -133,13 +151,22 @@ export class PostAddComponent {
   private saveCarData(): void {
     // Create a FormData object to upload files
     const formData = new FormData();
-  
+
+
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      const userId = userData.userId;
+      formData.append('userId', userId);
+    }
+
     // Append the selected images to the FormData object
     for (const image of this.uploadedImages) {
       formData.append('images', image);
     }
   
     // Append other car data to the FormData object
+    formData.append('price', this.postForm.value.price);
     formData.append('selectedCategory', this.postForm.value.selectedCategory);
     formData.append('engineCapacity', this.postForm.value.engineCapacity);
     formData.append('modelYear', this.postForm.value.modelYear);
@@ -196,6 +223,10 @@ export class PostAddComponent {
         Gpubrand:'',
         os:'',
         location: [''],
+
+        description: [''],
+        price: ['0']
+  
         // Set other laptop details form controls here
       });
     } else if (selectedCategory === 'cars') {
@@ -211,6 +242,8 @@ export class PostAddComponent {
         BodyType:'',
         location: [''],
         accident: [false], 
+        description: [''],
+        price: ['0']
         // Set other car details form controls here
       });
     }

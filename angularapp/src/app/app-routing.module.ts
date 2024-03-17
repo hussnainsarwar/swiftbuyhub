@@ -7,6 +7,7 @@ import { LoginComponent } from './screens/login/login.component';
 import { SearchBotComponent } from './screens/search-bot/search-bot.component';
 import { SignUpComponent } from './screens/sign-up/sign-up.component';
 import { CategoryComponent } from './screens/category/category.component';
+import { ViewCategoryComponent } from './screens/category/view-category/view-category.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'search',component:SearchBotComponent},
   {path:'sign-up',component:SignUpComponent},
   {path:'category/view/:name',component:CategoryComponent},
+  {path:'category/view/:name/:id',component:ViewCategoryComponent},
 
 
   { path: '**', component: NotFoundComponent }
