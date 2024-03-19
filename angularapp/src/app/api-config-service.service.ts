@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +90,19 @@ export class ApiConfigServiceService {
 
   getCategoryData(selectedCategory: string, id: string): Observable<any> {
     return this.httpClient.get<any>(`${this.API_BASE_URL}/search/${selectedCategory}/${id}`);
+  }
+
+
+  getAllDataByCategory(categoryName: string): Observable<any[]> {
+    if (categoryName === 'Cars') {
+      return this.getAllCars();
+    } else if (categoryName === 'Laptops') {
+      return this.getAllLaptops();
+    } else {
+      // Return an empty observable if the category is unknown
+      console.error('Unknown category:', categoryName);
+      return of([]);
+    }
   }
 
 }

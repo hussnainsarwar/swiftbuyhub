@@ -33,6 +33,8 @@ import {MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ViewCategoryComponent } from './screens/category/view-category/view-category.component';
+import { AboutUsComponent } from './screens/footer/about-us/about-us.component';
+import { PricingComponent } from './screens/pricing/pricing.component';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { ViewCategoryComponent } from './screens/category/view-category/view-cat
     CategoryComponent,
     PostAddComponent,
     ViewCategoryComponent,
+    AboutUsComponent,
+    PricingComponent,
   ],
   imports: [
     BrowserModule,

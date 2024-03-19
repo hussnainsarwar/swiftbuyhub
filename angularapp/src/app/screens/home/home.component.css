@@ -13,3 +13,13 @@
   
   /* Additional styling for card elements */
   
+  .category-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
+  .card-container {
+    flex: 0 0 auto; /* Ensure each card has a fixed size */
+    width: 300px; /* Adjust the width as per your design */
+  }
+  

@@ -8,7 +8,8 @@ import { SearchBotComponent } from './screens/search-bot/search-bot.component';
 import { SignUpComponent } from './screens/sign-up/sign-up.component';
 import { CategoryComponent } from './screens/category/category.component';
 import { ViewCategoryComponent } from './screens/category/view-category/view-category.component';
-
+import { AboutUsComponent } from './screens/footer/about-us/about-us.component';
+import { PricingComponent } from './screens/pricing/pricing.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {path:'home',component:HomeComponent},
@@ -18,6 +19,8 @@ const routes: Routes = [
   {path:'sign-up',component:SignUpComponent},
   {path:'category/view/:name',component:CategoryComponent},
   {path:'category/view/:name/:id',component:ViewCategoryComponent},
+  {path:'aboutus',component:AboutUsComponent},
+  {path:'pricing',component:PricingComponent},
 
 
   { path: '**', component: NotFoundComponent }
