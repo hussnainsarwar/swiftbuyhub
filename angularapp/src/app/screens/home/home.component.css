@@ -1,0 +1,25 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+.card-container {
+    width: 300px; /* Set a fixed width for each card container */
+  }
+  
+  .card {
+    width: 100%; /* Ensure that each card takes up the full width of its container */
+  }
+  
+  /* Additional styling for card elements */
+  
+  .category-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
+  .card-container {
+    flex: 0 0 auto; /* Ensure each card has a fixed size */
+    width: 300px; /* Adjust the width as per your design */
+  }
+  
