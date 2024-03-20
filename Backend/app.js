@@ -11,6 +11,7 @@ const mongoose=require('./database/mongoose.js');
 const User=require('./database/models/user.js')
 const Car=require('./database/models/Car.js')
 const Laptop=require('./database/models/Laptop.js')
+const ChatMessage = require('./database/models/ChatMessage');
 
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
@@ -276,3 +277,41 @@ app.get('/search/:selectedCategory/:id', async (req, res) => {
   }
 });
 
+
+app.post('/chat', async (req, res) => {
+  try {
+    const { senderId, receiverId, message } = req.body;
+
+    // Create a new chat message
+    const chatMessage = new ChatMessage({
+      senderId,
+      receiverId,
+      message
+    });
+
+    // Save the chat message to the database
+    await chatMessage.save();
+
+    res.status(201).json({ message: 'Chat message saved successfully' });
+  } catch (error) {
+    console.error('Error saving chat message:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+app.get('/messages/:senderId', async (req, res) => {
+  try {
+    const senderId = req.params.senderId;
+
+    // Query the database for messages where either senderId or receiverId matches the given senderId
+    const messages = await ChatMessage.find({ $or: [{ senderId }, { receiverId: senderId }] });
+
+    // Return the messages as a response
+    res.status(200).json(messages);
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});

@@ -105,4 +105,13 @@ export class ApiConfigServiceService {
     }
   }
 
+  sendMessage(senderId: string, receiverId: string, message: string): Observable<any> {
+    const url = `${this.API_BASE_URL}/chat`;
+    const payload = { senderId, receiverId, message };
+    return this.httpClient.post<any>(url, payload);
+  }
+
+  getMessagesBySenderId(senderId: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_BASE_URL}/messages/${senderId}`);
+  }
 }
