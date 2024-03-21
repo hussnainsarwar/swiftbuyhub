@@ -8,6 +8,7 @@ import { Observable, of, tap } from 'rxjs';
 export class ApiConfigServiceService {
 
   API_BASE_URL='http://localhost:3000';
+  API_MODEL_URL='http://localhost:8000'
 
 
   constructor(private httpClient:HttpClient) { }
@@ -21,6 +22,22 @@ export class ApiConfigServiceService {
   // LoginUser(userData: any){
   //   return this.httpClient.post(`${this.API_BASE_URL}/login`, userData);
   // }
+
+  inspection(body:object): Observable<any> {
+    return this.httpClient.post(`${this.API_MODEL_URL}/inspect/carmodel`,body
+    // {
+    //   "engineCapacity":1000,
+    //   "modelYear":2005,
+    //   "mileage":1536643,
+    //   "company":"Suzuki",
+    //   "variant":"Cultus",
+    //   "engineType":1,
+    //   "transmission":1,
+    //   "bodyType":2
+    // }
+    );
+  }
+
  
   LoginUser(userData: any): Observable<any> {
     return this.httpClient.post(`${this.API_BASE_URL}/login`, userData)

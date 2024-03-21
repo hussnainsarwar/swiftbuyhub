@@ -87,7 +87,7 @@
           </li>
 
   
-          <div class="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
+          <div class="mt-10 flex flex-col items-center justify-between space-y-4 border-t  py-4 sm:flex-row sm:space-y-0">
             <div class="flex items-end">
               <h1 class="text-3xl font-bold">{{car.price}}</h1>
               <span class="text-base">/PKR</span>
@@ -99,7 +99,25 @@
               </svg>
               Chat with User
             </button>
+            
+            
           </div>
+          <div class="flex flex-col items-center justify-between space-y-4  border-b py-4 sm:flex-row sm:space-y-0">
+            <div class="flex items-end">
+              <h1 class="text-3xl font-bold">{{formatPriceWithCommas(inspectionResult)}}</h1>
+              <span class="text-base">{{ inspectionResult ? '/PKR' : null}}</span>
+            </div>
+  
+            <button (click)="getCarInspection(car.engineCapacity,car.modelYear,car.Mileage,car.Company,car.Vaarient,car.EngineType,car.Transmission,car.BodyType)"  type="button" class="inline-flex items-center justify-center rounded-md border-2 border-transparent  bgColor-inspection bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow bgColor-inspection" >
+              <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-3 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+              Car Inspection
+            </button>
+            
+            
+          </div>
+          
   
           <ul class="mt-8 space-y-2">
             <li class="flex items-center text-left text-sm font-medium text-gray-600">
@@ -115,6 +133,8 @@
             </li>
           </ul>
         </div>
+        
+
   
         <div class="lg:col-span-3">
           <div class="border-b border-gray-300">

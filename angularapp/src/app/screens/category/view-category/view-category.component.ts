@@ -14,8 +14,9 @@ export class ViewCategoryComponent implements OnInit {
   messages: any[] = []; // Variable to store messages
   sortedMessages: any[] = []; // Variable to store sorted messages
 
-  laptop: any; // Variable to store laptop data
+  laptop: any; // Variable to storbody: { engineCapacity: string; modelYear: string; mileage: number; company: string; variant: string; engineType: string; transmission: string; bodyType: string; }, any: anye laptop data
   car: any; 
+  inspectionResult: any
 
   constructor(private apiService: ApiConfigServiceService,private route: ActivatedRoute) { }
 
@@ -49,6 +50,8 @@ export class ViewCategoryComponent implements OnInit {
 
   }
 
+ 
+
 
   getImageUrl(image: string): string {
     if (image) {
@@ -73,6 +76,38 @@ export class ViewCategoryComponent implements OnInit {
     }
   }
 
+  getCarInspection(engineCapacity:string, modelYear:string,Mileage:number,Company:string,Vaarient:string,EngineType:string,Transmission:string,BodyType:string)
+  {
+    const body = 
+    {
+      "engineCapacity":engineCapacity,
+      "modelYear":modelYear,
+      "mileage":Mileage,
+      "company":Company,
+      "variant":Vaarient,
+      "engineType":EngineType,
+      "transmission":Transmission,
+      "bodyType":BodyType
+
+    }
+    this.apiService.inspection(body).subscribe(
+      (response) =>{
+          this.inspectionResult = Math.round(response.price)
+      }
+    )
+  }
+
+  formatPriceWithCommas(price: number): string {
+    if (price === null || isNaN(price)) {
+      return ''; // Handle null or NaN values
+    }
+    const priceString = price.toString();
+    const parts = priceString.split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
+  }
+
+ 
 
   fetchMessages() {
     const userDataString = localStorage.getItem('userData');
