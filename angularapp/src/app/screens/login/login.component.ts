@@ -21,8 +21,8 @@ export class LoginComponent {
     ){}
 
     onSubmit() {
-      console.log('Username:', this.username);
-      console.log('Password:', this.password);
+      // console.log('Username:', this.username);
+      // console.log('Password:', this.password);
   
       const userData = {
         e_mail: this.username,
@@ -32,7 +32,7 @@ export class LoginComponent {
       // Call the API service to perform login
       this.ApiConfigServiceService.LoginUser(userData).subscribe(
         (response) => {
-          console.log('Login successful:', response);
+          // console.log('Login successful:', response);
           // Optionally, you can navigate to another page on successful login
           this.router.navigate(['/home']);
         },

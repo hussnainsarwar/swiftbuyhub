@@ -31,3 +31,13 @@ button {
     width: 1.25rem;
     height: 1.25rem;
   }
+
+
+  /* Add or modify styles for the img element */
+.card .img-fluid {
+  width: 100%; /* Ensure the image takes the full width of its container */
+  height: 100%; /* Ensure the image takes the full height of its container */
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+

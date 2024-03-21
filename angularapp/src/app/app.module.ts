@@ -31,6 +31,11 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ViewCategoryComponent } from './screens/category/view-category/view-category.component';
+import { AboutUsComponent } from './screens/footer/about-us/about-us.component';
+import { PricingComponent } from './screens/pricing/pricing.component';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +52,9 @@ import { MatCardModule } from '@angular/material/card';
     CategoriesViewHomeComponent,
     CategoryComponent,
     PostAddComponent,
+    ViewCategoryComponent,
+    AboutUsComponent,
+    PricingComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +73,8 @@ import { MatCardModule } from '@angular/material/card';
     MatSelectModule,
     MatRadioModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatCheckboxModule
 
   ],
   providers: [],
