@@ -6,7 +6,7 @@ first clone our project
 
 ``` git clone -b main https://github.com/hussnainsarwar/swiftbuyhub ```
 
-open root directry
+open root directory
 
 ### Step 2
 cd angular
@@ -20,14 +20,14 @@ cd ../Backend
 
 ``` npm i ```
 
-running port 3000
+running on port 3000
 
 ### step 4
 cd ../Model
 
 ``` install modules and run server ```
 
-running port 8000
+running on port 8000
 
 
 
