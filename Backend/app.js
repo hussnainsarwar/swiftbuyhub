@@ -420,38 +420,6 @@ app.get('/users', async (req, res) => {
 
 
 
-// Route to send email
-app.post('/sendEmail', async (req, res) => {
-  try {
-    const { subscriptionType, userEmail } = req.body;
-
-    // Create transporter
-    const transporter = await createTransporter();
-
-    // Email options
-    const mailOptions = {
-      from: 'hussnainlocal@gmail.com',
-      to: userEmail,
-      subject: 'Subscription Confirmation',
-      text: `Thank you for subscribing to ${subscriptionType}. Subscrption Our Team will Reach you out soon to keep you updated `
-    };
-
-    const subscription = new Subscription({
-      email: userEmail,
-      subscriptionType: subscriptionType
-    });
-    await subscription.save();
-
-    // Send email
-    await transporter.sendMail(mailOptions);
-    res.status(201).json({ message: 'Email sent successfully' }); // Return JSON response
-  } catch (error) {
-    console.error('Error occurred:', error);
-    res.status(500).json({ error: 'Internal server error' }); // Return JSON response
-  }
-});
-
-
 app.get('/subscriptions', async (req, res) => {
   try {
     const subscriptions = await Subscription.find();
