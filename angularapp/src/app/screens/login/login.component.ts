@@ -32,9 +32,14 @@ export class LoginComponent {
       // Call the API service to perform login
       this.ApiConfigServiceService.LoginUser(userData).subscribe(
         (response) => {
-          // console.log('Login successful:', response);
+          
+          // console.log('Login successful:', response.user.role);
+          if(response.user.role == 'admin'){
+            this.router.navigate(['/users/admin/', response.user._id]); 
+          }else{
+            this.router.navigate(['/home']);
+          }
           // Optionally, you can navigate to another page on successful login
-          this.router.navigate(['/home']);
         },
         (error) => {
           console.error('Login failed:', error);

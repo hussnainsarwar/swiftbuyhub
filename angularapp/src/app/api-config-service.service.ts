@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,8 @@ export class ApiConfigServiceService {
         tap((response: any) => {
           const userData = {
             userId: response.user._id,
-            username: response.user.e_mail
+            username: response.user.e_mail,
+            role:response.user.role
           };
           localStorage.setItem(this.USER_DATA_KEY, JSON.stringify(userData));
         })
@@ -105,13 +107,91 @@ export class ApiConfigServiceService {
     }
   }
 
-  sendMessage(senderId: string, receiverId: string, message: string): Observable<any> {
+  sendMessage(senderId: string, receiverId: string, message: string, adId: string): Observable<any> {
     const url = `${this.API_BASE_URL}/chat`;
-    const payload = { senderId, receiverId, message };
+    const payload = { senderId, receiverId, message,adId };
     return this.httpClient.post<any>(url, payload);
   }
-
-  getMessagesBySenderId(senderId: string): Observable<any> {
-    return this.httpClient.get<any>(`${this.API_BASE_URL}/messages/${senderId}`);
+  getMessagesBySenderIdAndAdId(senderId: string, adId: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_BASE_URL}/messages/${senderId}/${adId}`);
   }
+  
+  getUserName(userId: string): Observable<any> {
+    const url = `${this.API_BASE_URL}/username/${userId}`; // Adjust the endpoint URL
+    return this.httpClient.get<any>(url);
+  }
+  
+  
+  getMessagesBySenderId(senderId: string): Observable<any> {
+    const url = `${this.API_BASE_URL}/messages/${senderId}`;
+    return this.httpClient.get<any>(url);
+  }
+
+  getAllUsers(): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.API_BASE_URL}/users`);
+  }
+
+  sendEmail(emailData: any): Observable<any> {
+    const url = `${this.API_BASE_URL}/sendEmail`; // Adjust the endpoint URL for sending emails
+    return this.httpClient.post(url, emailData);
+  }
+
+  getSubscriptions(): Observable<any[]> {
+    const url = `${this.API_BASE_URL}/subscriptions`;
+    return this.httpClient.get<any[]>(url);
+  }
+
+  updateSubscriptionStatus(subscriptionId: string, newStatus: string): Observable<any> {
+    const url = `${this.API_BASE_URL}/subscriptions/${subscriptionId}/status`;
+    return this.httpClient.put(url, { status: newStatus });
+  }
+
+  subscribeToNewsletter(email: string): Observable<any> {
+    const url = `${this.API_BASE_URL}/newsletter/subscribe`;
+    return this.httpClient.post(url, { email });
+  }
+
+
+  changePassword(newPassword: string,currentPassword:string): Observable<any> {
+    const userDataString = localStorage.getItem(this.USER_DATA_KEY);
+    if (!userDataString) {
+      // Handle the case where user data is not available in local storage
+      return of({ error: 'User data not found in local storage' });
+    }
+
+    const userData = JSON.parse(userDataString);
+    const e_mail = userData.username; // Assuming username in userData is the email
+    // console.log(e_mail,currentPassword,newPassword,'ccccccccccccccccccc')
+
+    return this.httpClient.post(`${this.API_BASE_URL}/change-password`, { e_mail, newPassword ,currentPassword});
+  }
+
+  getUser() {
+    return this.httpClient.get(`${this.API_BASE_URL}/user`);
+  }
+
+  updateUsername(newUsername: string) {
+    const userDataString = localStorage.getItem(this.USER_DATA_KEY);
+    if (!userDataString) {
+      return new Observable(observer => {
+        observer.error('User data not found in local storage');
+      });
+    }
+
+    const userData = JSON.parse(userDataString);
+    const userId = userData.userId;
+    return this.httpClient.put(`${this.API_BASE_URL}/users/${userId}/username`, { username: newUsername });
+  }
+  
+  deleteAccount(): Observable<any> {
+    const userDataString = localStorage.getItem(this.USER_DATA_KEY);
+    if (!userDataString) {
+      return throwError('User data not found in local storage');
+    }
+  
+    const userData = JSON.parse(userDataString);
+    const userId = userData.userId;
+    return this.httpClient.delete(`${this.API_BASE_URL}/users/${userId}`);
+  }
+
 }

@@ -15,6 +15,10 @@ const chatMessageSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  adId: {
+    type: String, // Include adId field
+    required: true
+  },
   timestamp: {
     type: String, // Change type to String
     required: true,

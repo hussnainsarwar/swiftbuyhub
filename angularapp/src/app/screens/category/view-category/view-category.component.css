@@ -57,3 +57,118 @@
     cursor: pointer;
   }
   
+
+/* Style for the container of each message */
+/* Chat container */
+.chat-container {
+  width: 40%;
+  height: 400px; /* Set height as needed */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chat header */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+/* Close icon */
+.close-icon {
+  cursor: pointer;
+}
+
+/* Chat body */
+.chat-body {
+  flex: 1;
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 10px;
+}
+
+/* Message container */
+.message-container {
+  margin-bottom: 10px;
+}
+
+/* Message */
+.message {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 70%;
+}
+
+/* Sent message */
+/* Sent message */
+.sent {
+  background-color: #DCF8C6; /* Light green */
+  align-self: flex-end; /* Align to the right side */
+  margin-left: 60%;
+}
+
+/* Received message */
+.received {
+  background-color: #EAEAEA; /* Light gray */
+  align-self: flex-start; /* Align to the left side */
+}
+
+
+/* Message content */
+.message-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Message text */
+.message-text {
+  margin-bottom: 4px;
+}
+
+/* Timestamp */
+.timestamp {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Chat footer */
+.chat-footer {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+/* Message input */
+.message-input {
+  flex: 1;
+  padding: 8px;
+  margin-right: 10px;
+}
+
+/* Send button */
+.send-button {
+  padding: 8px 16px;
+  background-color: #007BFF; /* Blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Circle icon */
+.circle-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #007BFF; /* Blue */
+  /* margin-right: 10px; */
+}
+
+
+
+.blurred-button {
+  filter: blur(2px);
+  pointer-events: none;
+  opacity: 0.5;
+}

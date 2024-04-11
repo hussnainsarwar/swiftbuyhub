@@ -1,6 +1,7 @@
-import { Component, OnInit , ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiConfigServiceService } from 'src/app/api-config-service.service';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   cars: any[] | undefined;
   laptops: any[] | undefined;
+  isDarkMode: boolean = false; // Define isDarkMode property
 
   constructor(private apiService: ApiConfigServiceService,private router: Router) {}
 
@@ -18,6 +20,12 @@ export class HomeComponent implements OnInit {
     this.getAllCars();
     this.getAllLaptops();
   }
+
+  
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
 
   viewItem(categoryName: string, carId: string) {
     // Navigate to the specified path with category name and car ID as parameters

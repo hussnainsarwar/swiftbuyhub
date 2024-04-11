@@ -11,6 +11,7 @@ import { ApiConfigServiceService } from 'src/app/api-config-service.service';
 })
 export class SignUpComponent {
   signupForm: FormGroup;
+  loading: boolean = false; // Variable to control loading indicator
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +31,8 @@ export class SignUpComponent {
 
   onSubmit() {
     if (this.signupForm.valid) {
+      this.loading = true; // Show loading indicator
+
       const formData = this.signupForm.value;
 
       // Call the user service to register the user
@@ -45,6 +48,10 @@ export class SignUpComponent {
       );
     } else {
       console.log('Form is invalid. Validation errors:', this.signupForm.errors);
+      // Mark all fields as touched to display validation errors
+      Object.values(this.signupForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
     }
   }
 }

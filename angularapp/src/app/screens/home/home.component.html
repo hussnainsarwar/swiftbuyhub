@@ -63,8 +63,35 @@
 </div>
 
   
+<div class="relative mx-auto my-10 flex max-w-md flex-col justify-between  px-10 lg:max-w-screen-lg lg:flex-row">
+  <div class="bg-slate-100 absolute left-0 h-full w-full lg:w-5/6 rounded-md border border-blue-200"></div>
+  <div class="relative py-10 ">
+    <span class="rounded-full bg-blue-200 px-2 py-1 text-xs text-blue-500">NEW</span> 
+    <h2 class="text-slate-900 text-3xl font-bold lg:text-5xl">Just releasing</h2>
+    <p class="text-slate-700 mt-4 max-w-lg">New categories and Inspection services added monthly to enhance user experience and make this plaform globally categorized </p>
+  </div>
+  <div class="relative h-72 lg:w-72">
+    <div class="bg-slate-50 shadow-slate-200 absolute h-56 w-56 translate-x-6 translate-y-6 rounded-2xl shadow-lg backdrop-blur-lg lg:h-60 lg:w-60"></div>
+    <div class="shadow-slate-200 absolute flex h-56 w-56 translate-x-3 translate-y-3 flex-col items-center justify-center rounded-2xl bg-white shadow backdrop-blur-lg lg:h-60 lg:w-60">
+      <div class="flex h-40 w-40 flex-col items-center justify-center rounded-full border-2 border-dashed">
+        <p class="text-center text-5xl font-bold text-blue-500 lg:text-6xl">1</p>
+        <span class="text-center text-xs uppercase leading-4 text-blue-500"
+          >New <br />
+          Categories</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
 
-<section class="relative overflow-hidden bg-gray-100 py-12 sm:py-16 lg:py-20">
+ 
+
+
+
+
+
+
+<section class="section1 relative overflow-hidden bg-gray-100 py-12 sm:py-16 lg:py-2"  [class.bg-black]="isDarkMode">
   <div class="absolute h-72 w-72 scale-125 -right-8 -bottom-10">
     <div class="absolute h-60 w-60 rounded-2xl border-4 border-blue-600"></div>
     <div class="absolute h-60 w-60 translate-x-3 translate-y-3 rounded-2xl border-4 border-blue-600"></div>
@@ -97,7 +124,8 @@
   </div>
 </section>
 
-<section class="relative bg-blue-50 py-10 text-blue-900 sm:py-16 lg:py-24">
+
+<section class="section1 relative bg-blue-50 py-10 text-blue-900 sm:py-16 lg:py-24" [class.bg-black]="isDarkMode">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="text-center">
       <div class="mb-4 inline-flex h-12 w-12 text-blue-700">
@@ -118,5 +146,13 @@
   </div>
 </section>
 
+
+<!-- home.component.html -->
+<button class="Btn" (click)="scrollToTop()">
+  <svg height="1.2em" class="arrow" viewBox="0 0 512 512">
+    <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"></path>
+  </svg>
+  <p class="text">Back to Top</p>
+</button>
 
 <app-footer></app-footer>

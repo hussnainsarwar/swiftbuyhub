@@ -35,7 +35,19 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ViewCategoryComponent } from './screens/category/view-category/view-category.component';
 import { AboutUsComponent } from './screens/footer/about-us/about-us.component';
 import { PricingComponent } from './screens/pricing/pricing.component';
-
+import { ChatsComponent } from './screens/chats/chats.component';
+import {MatDividerModule} from '@angular/material/divider';
+import { AdminComponent } from './screens/admin/admin.component';
+import { OverviewComponent } from './screens/admin/overview/overview.component';
+import { SubscriptionsComponent } from './screens/admin/subscriptions/subscriptions.component';
+import { UsersComponent } from './screens/admin/users/users.component';
+import { PremiumComponent } from './screens/pricing/premium/premium.component';
+import { AddUserDialogComponent } from './screens/admin/add-user-dialog/add-user-dialog.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import {MdbDropdownModule} from 'mdb-angular-ui-kit/dropdown';
+import { SettingComponent } from './screens/toolbar/setting/setting.component';
+import { EmailchangeComponent } from './screens/toolbar/setting/emailchange/emailchange.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +67,16 @@ import { PricingComponent } from './screens/pricing/pricing.component';
     ViewCategoryComponent,
     AboutUsComponent,
     PricingComponent,
+    ChatsComponent,
+    AdminComponent,
+    OverviewComponent,
+    SubscriptionsComponent,
+    UsersComponent,
+    PremiumComponent,
+    AddUserDialogComponent,
+    SettingComponent,
+    EmailchangeComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -74,7 +96,11 @@ import { PricingComponent } from './screens/pricing/pricing.component';
     MatRadioModule,
     MatInputModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDividerModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MdbDropdownModule
 
   ],
   providers: [],

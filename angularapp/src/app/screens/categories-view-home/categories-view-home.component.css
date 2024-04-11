@@ -2,6 +2,11 @@
     height: 80vh;
 } */
 
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
 .categoryheading{
     color: #333;
     margin-bottom: 40px;

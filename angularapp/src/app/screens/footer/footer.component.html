@@ -30,7 +30,7 @@
           </ul>
         </nav>
       </div>
-      <div class="">
+      <!-- <div class="">
         <div class="mt-4 mb-2 font-medium xl:mb-4">Subscribe to our Newsletter</div>
         <div class="flex flex-col">
           <div class="mb-4">
@@ -38,7 +38,22 @@
             <button class="block rounded-xl bg-blue-600 px-6 py-3 font-medium text-white">Subscribe</button>
           </div>
         </div>
+      </div> -->
+      <div class="">
+        <div class="mt-4 mb-2 font-medium xl:mb-4">Subscribe to our Newsletter</div>
+        <div class="flex flex-col">
+          <div class="mb-4">
+            <input type="email" class="focus:outline mb-2 block h-14 w-full rounded-xl bg-gray-200 px-4 sm:w-80 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="Enter your email" [(ngModel)]="email" />
+            <button class="block rounded-xl bg-blue-600 px-6 py-3 font-medium text-white" (click)="subscribe()" [disabled]="loading">Subscribe</button>
+          </div>
+          <div *ngIf="loading" class="text-blue-500">Loading...</div>
+          <div *ngIf="subscriptionSuccess" class="text-green-500">Thank you for subscribing!</div>
+          <div *ngIf="subscriptionError" class="text-red-500">Please check your email and try again.</div>
+        </div>
       </div>
+      
+      
+      
     </div>
     <div class="bg-gray-100">
       <div class="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-gray-500 sm:flex-row sm:justify-between sm:text-left">
