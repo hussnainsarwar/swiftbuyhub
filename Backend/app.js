@@ -420,41 +420,6 @@ app.get('/users', async (req, res) => {
 
 
 
-// const { google } = require('googleapis');
-// const OAuth2 = google.auth.OAuth2;
-// const oauth2Client = new OAuth2(
-//   '657862359472-o5c1rgps10fkds77cgbio852tkk7tunc.apps.googleusercontent.com',
-//   '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',
-//   'https://developers.google.com/oauthplayground' // Redirect URL
-// );
-
-// oauth2Client.setCredentials({
-//   refresh_token: '1//04pBbWXoMM7a9CgYIARAAGAQSNwF-L9IrPIsy-cqoBhhg8UsmN05I1RFXS47uxxyIKCJN_D7XiytN6lxGKduGqf-kUASfjgmd-sQ'
-// });
-
-// // Get an access token
-// const getAccessToken = async () => {
-//   const accessToken = await oauth2Client.getAccessToken();
-//   return accessToken;
-// };
-
-// // Create a Nodemailer transporter using OAuth2
-// const createTransporter = async () => {
-//   const accessToken = await getAccessToken();
-//   const transporter = nodemailer.createTransport({
-//     service: 'gmail',
-//     auth: {
-//       type: 'OAuth2',
-//       user: 'hussnainlocal@gmail.com', // Your email address
-//       clientId: '657862359472-o5c1rgps10fkds77cgbio852tkk7tunc.apps.googleusercontent.com',
-//       clientSecret: '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',
-//       refreshToken: '1//04pBbWXoMM7a9CgYIARAAGAQSNwF-L9IrPIsy-cqoBhhg8UsmN05I1RFXS47uxxyIKCJN_D7XiytN6lxGKduGqf-kUASfjgmd-sQ',
-//       accessToken: accessToken
-//     }
-//   });
-//   return transporter;
-// };
-
 // Route to send email
 app.post('/sendEmail', async (req, res) => {
   try {
