@@ -4,3 +4,6 @@
 # Ignore system files
 Thumbs.db
 .DS_Store
+
+# Node modules
+node_modules/
